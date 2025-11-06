@@ -10,7 +10,7 @@ from config import TRAIN_DIR, TEST_DIR, EMOTION_MODEL_PATH, EMOTION_IMG_SIZE, EM
 
 def build_model(img_size=EMOTION_IMG_SIZE, num_classes=EMOTION_NUM_CLASSES):
     base = MobileNetV2(weights='imagenet', include_top=False, input_shape=(img_size[0], img_size[1], 3))
-    base.trainable = False
+    base.trainable = True
     x = base.output
     x = GlobalAveragePooling2D()(x)
     x = Dropout(0.3)(x)
@@ -36,7 +36,7 @@ def main():
     train_gen = datagen_train.flow_from_directory(
         TRAIN_DIR,
         target_size=EMOTION_IMG_SIZE,
-        batch_size=2,
+        batch_size=8,
         class_mode='categorical',
         color_mode='rgb'
     )
@@ -44,24 +44,24 @@ def main():
     test_gen = datagen_test.flow_from_directory(
         TEST_DIR,
         target_size=EMOTION_IMG_SIZE,
-        batch_size=2,
+        batch_size=8,
         class_mode='categorical',
         color_mode='rgb'
     )
 
     print("Xây dựng mô hình")
     model = build_model()
-    model.compile(optimizer=Adam(1e-3), loss='categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=Adam(1e-4), loss='categorical_crossentropy', metrics=['accuracy'])
 
     callbacks = [
         ModelCheckpoint(EMOTION_MODEL_PATH, save_best_only=True, monitor='val_accuracy', mode='max'),
         ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=3),
-        EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+        EarlyStopping(monitor='val_loss', patience=15, restore_best_weights=True)
     ]
 
     print("Bắt đầu huấn luyện")
     print("-"*100)
-    model.fit(train_gen, validation_data=test_gen, epochs=5, callbacks=callbacks)
+    model.fit(train_gen, validation_data=test_gen, epochs=50, callbacks=callbacks)
 
 
     print("Huấn luyện xong mô hình đã lưu:", EMOTION_MODEL_PATH)

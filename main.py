@@ -5,6 +5,7 @@ from predict_emotion import predict_emotion
 import pandas as pd
 import time
 import PIL.Image, PIL.ImageTk
+from tkinter import filedialog
 
 class EmotionApp:
     def __init__(self, root):
@@ -25,6 +26,7 @@ class EmotionApp:
         #Nút bắt đầu và thoát
         tk.Button(root, text="Bắt đầu nhận diện", font=("Arial", 14), command=self.start_detection).pack(pady=10)
         tk.Button(root, text="Thoát", font=("Arial", 14), command=self.stop_detection).pack(pady=5)
+        tk.Button(root, text="Nhận diện từ file", font=("Arial", 14), command=self.select_image).pack(pady=5)
 
         #Label trạng thái
         self.label_status = tk.Label(root, text="", fg="blue", font=("Arial", 14))
@@ -106,6 +108,37 @@ class EmotionApp:
             df.to_csv("emotion_log.csv", index=False)
             self.label_result.config(text=f"Đã lưu {len(self.emotions_recorded)} cảm xúc vào emotion_log.csv")
             print("Đã lưu ảnh")
+    def select_image(self):
+        file_path = filedialog.askopenfilename(
+            title="Chọn ảnh",
+            filetypes=[("Image files", "*.jpg *.jpeg *.png *.bmp")]
+        )
+        if not file_path:
+            return
+
+        # Đọc ảnh
+        frame = cv2.imread(file_path)
+        if frame is None:
+            self.label_result.config(text="Không thể mở ảnh!")
+            return
+
+        # Dự đoán cảm xúc
+        emotion, frame_processed, _ = predict_emotion(frame)
+
+        # Hiển thị ảnh trong GUI
+        frame_rgb = cv2.cvtColor(frame_processed, cv2.COLOR_BGR2RGB)
+        img = PIL.Image.fromarray(frame_rgb)
+        imgtk = PIL.ImageTk.PhotoImage(image=img)
+        self.video_label.imgtk = imgtk
+        self.video_label.configure(image=imgtk)
+
+        # Hiển thị kết quả
+        self.label_result.config(text=f"Cảm xúc dự đoán: {emotion}")
+
+        # Lưu kết quả vào CSV
+        self.emotions_recorded.append({'time': 'file', 'label': emotion, 'file': file_path})
+        df = pd.DataFrame(self.emotions_recorded)
+        df.to_csv("emotion_log.csv", index=False)
 
 if __name__ == "__main__":
     root = tk.Tk()
