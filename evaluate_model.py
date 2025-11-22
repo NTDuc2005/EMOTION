@@ -1,68 +1,99 @@
-import tensorflow as tf
-import matplotlib.pyplot as plt
+import torch
+import torch.nn as nn
+from torchvision import datasets, transforms
+from torch.utils.data import DataLoader
 import numpy as np
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-from config import TEST_DIR, EMOTION_MODEL_PATH, EMOTION_LABELS, EMOTION_IMG_SIZE
+from model_cnn import EmotionCNN
 
-print("Đang tải mô hình")
-model = tf.keras.models.load_model(EMOTION_MODEL_PATH)
-#Tải dữ liệu test
-print("Đang tải dữ liệu test từ thư mục:", TEST_DIR)
+# --- Config ---
+TEST_DIR = "data/test"
+MODEL_PATH = "cnn_emotion_rgb.pth"
+IMG_SIZE = 48
+NUM_CLASSES = 7
+BATCH_SIZE = 32
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+EMOTION_LABELS = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
-datagen_test = ImageDataGenerator(rescale=1./255)
-test_gen = datagen_test.flow_from_directory(
-    TEST_DIR,
-    target_size=EMOTION_IMG_SIZE,
-    batch_size=32,
-    class_mode='categorical',
-    shuffle=False
-)
+# --- Transform ---
+test_transform = transforms.Compose([
+    transforms.Resize((IMG_SIZE, IMG_SIZE)),
+    transforms.ToTensor()
+])
 
+test_dataset = datasets.ImageFolder(TEST_DIR, transform=test_transform)
+test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
-#Đánh giá mô hình
-loss, acc = model.evaluate(test_gen, verbose=1)
-print(f"Accuracy: {acc*100:.2f}% | Loss: {loss:.4f}")
+# --- Load model ---
+model = EmotionCNN(num_classes=NUM_CLASSES).to(DEVICE)
+model.load_state_dict(torch.load(MODEL_PATH, map_location=DEVICE))
+model.eval()
 
+criterion = nn.CrossEntropyLoss()
 
-#Dự đoán và vẽ biểu đồ xác suất
+# --- Evaluate ---
+all_preds = []
+all_probs = []
+all_labels = []
 
-print("Đang dự đoán và vẽ xác suất cảm xúc")
-pred_probs = model.predict(test_gen, verbose=1)
-pred_labels = np.argmax(pred_probs, axis=1)
+running_loss = 0.0
+total = 0
+correct = 0
 
-true_labels = test_gen.classes
+with torch.no_grad():
+    for images, labels in test_loader:
+        images, labels = images.to(DEVICE), labels.to(DEVICE)
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        running_loss += loss.item() * images.size(0)
+
+        probs = torch.softmax(outputs, dim=1)
+        preds = torch.argmax(probs, dim=1)
+        all_probs.append(probs.cpu().numpy())
+        all_preds.append(preds.cpu().numpy())
+        all_labels.append(labels.cpu().numpy())
+
+        total += labels.size(0)
+        correct += (preds == labels).sum().item()
+
+test_loss = running_loss / total
+test_acc = correct / total
+
+print(f"Test Loss: {test_loss:.4f} | Test Accuracy: {test_acc*100:.2f}%")
+
+# --- Dự đoán xác suất cho từng ảnh ---
+all_probs = np.concatenate(all_probs, axis=0)
+all_preds = np.concatenate(all_preds, axis=0)
+all_labels = np.concatenate(all_labels, axis=0)
 
 # Hiển thị 5 ảnh ngẫu nhiên cùng xác suất
-indices = np.random.choice(len(test_gen.filenames), 5, replace=False)
+indices = np.random.choice(len(test_dataset), 5, replace=False)
 
 plt.figure(figsize=(12, 6))
 for i, idx in enumerate(indices):
-    img_path = test_gen.filepaths[idx]
-    img = plt.imread(img_path)
-    true_label = EMOTION_LABELS[true_labels[idx]]
-    pred_label = EMOTION_LABELS[pred_labels[idx]]
-    probs = pred_probs[idx]
+    img, label = test_dataset[idx]
+    img_np = np.transpose(img.numpy(), (1, 2, 0))  # CHW -> HWC
+    true_label = EMOTION_LABELS[label]
+    pred_label = EMOTION_LABELS[all_preds[idx]]
+    probs = all_probs[idx]
 
     plt.subplot(2, 5, i+1)
-    plt.imshow(img)
-    plt.title(f"True: {true_label} Pred: {pred_label}")
+    plt.imshow(img_np)
+    plt.title(f"True: {true_label}\nPred: {pred_label}")
     plt.axis('off')
 
     plt.subplot(2, 5, i+6)
     plt.bar(EMOTION_LABELS, probs)
     plt.xticks(rotation=45)
-    plt.ylim(0, 1)
+    plt.ylim(0,1)
     plt.title("Probabilities")
 
 plt.tight_layout()
 plt.show()
 
-
-#Ma trận nhầm lẫn
-
-print("Vẽ Confusion Matrix...")
-cm = confusion_matrix(true_labels, pred_labels)
+# --- Confusion matrix ---
+cm = confusion_matrix(all_labels, all_preds)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=EMOTION_LABELS)
 disp.plot(cmap='Blues', xticks_rotation=45)
 plt.title("Confusion Matrix - Emotion Classification")

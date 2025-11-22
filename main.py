@@ -1,144 +1,184 @@
 import cv2
 import tkinter as tk
-from tkinter import ttk
-from predict_emotion import predict_emotion
-import pandas as pd
-import time
+from tkinter import ttk, filedialog
 import PIL.Image, PIL.ImageTk
-from tkinter import filedialog
+from predict_emotion import predict_emotion
+import csv
+from datetime import datetime
+import os
+
+LOG_FILE = "emotion_log.csv"
 
 class EmotionApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Nhận diện cảm xúc")
-        self.root.geometry("800x700")
+        self.root.geometry("1200x720")
+        self.root.configure(bg="#dbe9ff")
 
-        #Thời gian chạy
-        tk.Label(root, text="Thời gian chạy", font=("Arial", 16, "bold")).pack(pady=5)
-        self.duration_var = tk.IntVar(value=15)
-        ttk.Combobox(root, textvariable=self.duration_var, values=[10, 15, 20, 25, 30], font=("Arial", 14)).pack()
+        style = ttk.Style()
+        style.configure("TButton",
+                        font=("Segoe UI", 13),
+                        padding=10)
+        style.map("TButton",background=[("active", "#4da3ff")])
 
-        #Chụp biẻu cảm
-        tk.Label(root, text="Chụp", font=("Arial", 16, "bold")).pack(pady=5)
-        self.interval_var = tk.DoubleVar(value=1.0)
-        ttk.Combobox(root, textvariable=self.interval_var, values=[ 1.0, 1.5,  2.0], font=("Arial", 14)).pack()
+        main_frame = tk.Frame(root, bg="#dbe9ff")
+        main_frame.pack(fill="both", expand=True, padx=20, pady=20)
 
-        #Nút bắt đầu và thoát
-        tk.Button(root, text="Bắt đầu nhận diện", font=("Arial", 14), command=self.start_detection).pack(pady=10)
-        tk.Button(root, text="Thoát", font=("Arial", 14), command=self.stop_detection).pack(pady=5)
-        tk.Button(root, text="Nhận diện từ file", font=("Arial", 14), command=self.select_image).pack(pady=5)
+        left_frame = tk.Frame(main_frame, bg="white", bd=0, relief="flat")
+        left_frame.pack(side="left", fill="both", expand=True, padx=(0, 20))
 
-        #Label trạng thái
-        self.label_status = tk.Label(root, text="", fg="blue", font=("Arial", 14))
-        self.label_status.pack(pady=5)
+        # Khung bo góc viền webcam
+        self.video_border = tk.Frame(left_frame, bg="white")
+        self.video_border.pack(expand=True, fill="both", padx=10, pady=10)
 
-        #Video display
-        self.video_label = tk.Label(root)
-        self.video_label.pack()
+        self.video_label = tk.Label(self.video_border, bg="black")
+        self.video_label.pack(expand=True)
 
-        #Label kết quả
-        self.label_result = tk.Label(root, text="", fg="green", font=("Arial", 12, "bold"), wraplength=680, justify="center")
+        right_frame = tk.Frame(main_frame, bg="#e6f2ff", width=350, bd=2, relief="ridge")
+        right_frame.pack(side="right", fill="y")
+
+        tk.Label(right_frame, text="MENU ",
+                 bg="#e6f2ff", font=("Segoe UI", 18, "bold"),
+                 fg="#003d80").pack(pady=15)
+
+        # Nút bấm
+        ttk.Button(right_frame, text="ảnh từ folder",
+                   command=self.select_image).pack(pady=10, ipadx=10)
+        ttk.Button(right_frame, text="video từ folder",
+                   command=self.select_video).pack(pady=10, ipadx=10)
+        ttk.Button(right_frame, text="webcam",
+                   command=self.start_detection).pack(pady=10, ipadx=10)
+        ttk.Button(right_frame, text="Thoát",
+                   command=self.stop_detection).pack(pady=10, ipadx=10)
+
+        #kết quả
+        self.label_status = tk.Label(right_frame, text="",font=("Segoe UI", 12),bg="#e6f2ff", fg="#0059b3")
+        self.label_status.pack(pady=15)
+
+        self.label_result = tk.Label(right_frame, text="", wraplength=260,font=("Segoe UI", 13, "bold"), bg="#e6f2ff", fg="#008000")
         self.label_result.pack(pady=10)
 
-
-        #Dữ liệu lưu cảm xúc
-        self.emotions_recorded = []
+        #bến
         self.running = False
-        self.start_time = None
         self.cap = None
-        self.last_capture_time = 0
+        #tạo file csv
+        if not os.path.exists(LOG_FILE):
+            with open(LOG_FILE, "w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                writer.writerow(["time", "label", "confidence"])
 
-    #Nhận diện
+    def log_emotion(self, emotion, confidence):
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with open(LOG_FILE, "a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow([now, emotion, f"{float(confidence) * 100:.1f}"])
+
+    #webcam
     def start_detection(self):
         if self.running:
             return
-        self.running = True
-        self.emotions_recorded.clear()
-        self.label_status.config(text="Đang mở webcam")
-        self.cap = cv2.VideoCapture(0)
-        self.start_time = time.time()
-        self.duration = self.duration_var.get()
-        self.interval = self.interval_var.get()
-        self.last_capture_time = 0
-        self.root.after(100, self.detect_loop)
 
-    #Dự đoán
+        self.running = True
+        self.label_status.config(text="mở webcam")
+
+        self.cap = cv2.VideoCapture(0)
+        self.detect_loop()
+
     def detect_loop(self):
         if not self.running:
             return
 
         ret, frame = self.cap.read()
-        if ret and frame is not None:
-            current_time = time.time() - self.start_time
+        if ret:
+            emotion, frame, confidence = predict_emotion(frame)
+            confidence_value = float(confidence)  # ép kiểu float
 
-            # Chụp theo interval
-            if current_time - self.last_capture_time >= self.interval:
-                emotion, frame, _ = predict_emotion(frame)
-                self.emotions_recorded.append({'time': round(current_time, 2), 'label': emotion})
-                self.last_capture_time = current_time
+            self.log_emotion(emotion, confidence_value)
 
-            # Hiển thị video
-            frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            img = PIL.Image.fromarray(frame_rgb)
+            # Hiển thị nhãn và xác suất
+            self.label_result.config(text=f"Cảm xúc: {emotion} ({confidence_value * 100:.1f}%)")
+
+            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            img = PIL.Image.fromarray(rgb)
             imgtk = PIL.ImageTk.PhotoImage(image=img)
             self.video_label.imgtk = imgtk
             self.video_label.configure(image=imgtk)
 
-            # Update status
-            self.label_status.config(text=f"Đang nhận diện... {int(current_time)} / {self.duration}s")
-
-        # Dừng khi đủ duration
-        if time.time() - self.start_time >= self.duration:
-            self.stop_detection()
-        else:
-            self.root.after(10, self.detect_loop)  # chạy liên tục
-
+        self.root.after(15, self.detect_loop)
+    #dung
     def stop_detection(self):
-        if not self.running:
-            return
-        self.running = False
         if self.cap:
             self.cap.release()
+
+        self.running = False
         self.video_label.configure(image="")
-        self.label_status.config(text="Đã nhận diện")
+        self.label_status.config(text="Dừng nhận diện")
 
-        #Lưu biểu cảm
-        if self.emotions_recorded:
-            df = pd.DataFrame(self.emotions_recorded)
-            df.to_csv("emotion_log.csv", index=False)
-            self.label_result.config(text=f"Đã lưu {len(self.emotions_recorded)} cảm xúc vào emotion_log.csv")
-            print("Đã lưu ảnh")
+        # Gọi analyze.py
+        try:
+            from analyze import analyze_emotion_log
+            summary, message = analyze_emotion_log()
+
+            # In lên giao diện
+            self.label_result.config(text=f"{summary}\n\n{message}")
+        except Exception as e:
+            self.label_result.config(text=f"Lỗi: {e}")
+
+    #ảnh
     def select_image(self):
-        file_path = filedialog.askopenfilename(
-            title="Chọn ảnh",
-            filetypes=[("Image files", "*.jpg *.jpeg *.png *.bmp")]
+        path = filedialog.askopenfilename(
+            filetypes=[("Image Files", "*.png *.jpg *.jpeg")]
         )
-        if not file_path:
+        if not path:
             return
 
-        # Đọc ảnh
-        frame = cv2.imread(file_path)
-        if frame is None:
-            self.label_result.config(text="Không thể mở ảnh!")
-            return
+        frame = cv2.imread(path)
+        emotion, frame, confidence = predict_emotion(frame)
+        confidence_value = float(confidence)  # ép kiểu float
 
-        # Dự đoán cảm xúc
-        emotion, frame_processed, _ = predict_emotion(frame)
+        self.log_emotion(emotion, confidence_value)
 
-        # Hiển thị ảnh trong GUI
-        frame_rgb = cv2.cvtColor(frame_processed, cv2.COLOR_BGR2RGB)
-        img = PIL.Image.fromarray(frame_rgb)
+        # Hiển thị đồng thời nhãn và xác suất
+        self.label_result.config(text=f"Cảm xúc: {emotion} ({confidence_value * 100:.1f}%)")
+
+        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        img = PIL.Image.fromarray(rgb)
         imgtk = PIL.ImageTk.PhotoImage(image=img)
         self.video_label.imgtk = imgtk
         self.video_label.configure(image=imgtk)
 
-        # Hiển thị kết quả
-        self.label_result.config(text=f"Cảm xúc dự đoán: {emotion}")
+    def select_video(self):
+        path = filedialog.askopenfilename(
+            filetypes=[("Video Files", "*.mp4 *.avi")])
+        if not path:
+            return
+        cap = cv2.VideoCapture(path)
 
-        # Lưu kết quả vào CSV
-        self.emotions_recorded.append({'time': 'file', 'label': emotion, 'file': file_path})
-        df = pd.DataFrame(self.emotions_recorded)
-        df.to_csv("emotion_log.csv", index=False)
+        while True:
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            emotion, frame, confidence = predict_emotion(frame)
+            confidence_value = float(confidence)  # ép kiểu float
+
+            self.log_emotion(emotion, confidence_value)
+
+            # Hiển thị đồng thời nhãn và xác suất
+            self.label_result.config(text=f"Cảm xúc: {emotion} ({confidence_value * 100:.1f}%)")
+
+            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            img = PIL.Image.fromarray(rgb)
+            imgtk = PIL.ImageTk.PhotoImage(image=img)
+            self.video_label.imgtk = imgtk
+            self.video_label.configure(image=imgtk)
+
+            self.root.update()
+
+        cap.release()
+        self.label_status.config(text="Video đã phát xong")
+
 
 if __name__ == "__main__":
     root = tk.Tk()

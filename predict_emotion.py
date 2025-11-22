@@ -1,52 +1,97 @@
 import cv2
 import numpy as np
-from tensorflow.keras.models import load_model
+import torch
 from ultralytics import YOLO
+from model_cnn import EmotionCNN  # model grayscale
 
-#Mô hình YOLOv8
-face_model = YOLO("models/yolov8n-face-lindevs.pt")
-emotion_model = load_model("models/emotion_model.h5")
+#Config
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print("Using device:", DEVICE)
 
-#Danh sách nhãn cảm xúc
+MODEL_PATH = "models/emotion_model.pth"
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
-#Hàm nhận diện cảm xúc
-def predict_emotion(frame):
+face_model = YOLO("models/yolov8n-face-lindevs.pt")  # đường dẫn model face
+
+#EmotionCNN(grayscale)
+emotion_model = EmotionCNN(num_class=7).to(DEVICE)
+
+# Load checkpoint, fix key fc3 nếu Sequential
+state_dict = torch.load(MODEL_PATH, map_location=DEVICE)
+model_dict = emotion_model.state_dict()
+
+# Nếu checkpoint cũ có fc3.0.weight -> map về fc3.weight
+fixed_dict = {}
+for k, v in state_dict.items():
+    if k.startswith("fc3.0."):
+        new_k = k.replace("fc3.0.", "fc3.")
+    else:
+        new_k = k
+    fixed_dict[new_k] = v
+
+# Chỉ lấy các key khớp shape
+pretrained_dict = {k: v for k, v in fixed_dict.items() if k in model_dict and v.size() == model_dict[k].size()}
+model_dict.update(pretrained_dict)
+emotion_model.load_state_dict(model_dict)
+emotion_model.eval()
+
+#Nhận ảnh (BGR) -> detect face -> chuyển về grayscale -> predict cảm xúc
+def predict_emotion(frame, padding=10):
     results = face_model(frame, conf=0.5)
     r = results[0]
 
+    # Nếu không phát hiện face
     if not r.boxes or len(r.boxes) == 0:
-        return "Neutral", frame, np.zeros(len(emotion_labels))  # luôn trả giá trị
+        return "Neutral", frame, 1.0
 
-    for box in r.boxes:
-        x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
-        face = frame[y1:y2, x1:x2]
-        if face.size == 0:
-            continue
+    # Chỉ lấy face đầu tiên
+    box = r.boxes[0]
+    x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())
+    h, w, _ = frame.shape
+    x1, y1 = max(0, x1-padding), max(0, y1-padding)
+    x2, y2 = min(w, x2+padding), min(h, y2+padding)
 
-        img_h, img_w, channels = emotion_model.input_shape[1:4]
-        face = cv2.resize(face, (img_w, img_h))
+    face = frame[y1:y2, x1:x2]
+    if face.size == 0:
+        return "Neutral", frame, 1.0
 
-        if channels == 1:
-            face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
-            face = np.expand_dims(face, axis=-1)
-        else:
-            face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
+    #Chuyển sang grayscale 48x48
+    face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+    face = cv2.resize(face, (48, 48))
+    face = face.astype("float32") / 255.0
+    face = np.expand_dims(face, axis=0)  # CHW 1x48x48
+    face = np.expand_dims(face, axis=0)  # batch 1x1x48x48
+    face_tensor = torch.tensor(face, device=DEVICE)
 
-        face = face.astype('float32') / 255.0
-        face = np.expand_dims(face, axis=0)
+    #Predict
+    with torch.no_grad():
+        outputs = emotion_model(face_tensor)
+        probs = torch.softmax(outputs, dim=1).cpu().numpy()[0]
 
-        prediction = emotion_model.predict(face, verbose=0)
-        emotion_label = emotion_labels[np.argmax(prediction)]
-        emotion_probs = prediction[0]
+    idx = np.argmax(probs)
+    emotion = emotion_labels[idx]
+    confidence = float(probs[idx])
 
-        cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)
-        cv2.putText(frame, emotion_label, (x1, y1 - 10),
-                    cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36, 255, 12), 2)
+    # --- Vẽ bounding box và nhãn ---
+    cv2.rectangle(frame, (x1,y1), (x2,y2), (255,0,0), 2)
+    cv2.putText(frame, f"{emotion} ({confidence*100:.1f}%)",
+                (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,255,0), 2)
 
-        # Trả ngay emotion đầu tiên detect được
-        return emotion_label, frame, emotion_probs
+    return emotion, frame, confidence
 
-    # Nếu không detect được face hợp lệ
-    return "Neutral", frame, np.zeros(len(emotion_labels))
 
+#Kiểm tra webcam
+if __name__ == "__main__":
+    cap = cv2.VideoCapture(0)
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+
+        emotion, frame, conf = predict_emotion(frame)
+        cv2.imshow("Emotion Detection", frame)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
