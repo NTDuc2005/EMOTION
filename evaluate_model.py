@@ -62,18 +62,18 @@ test_acc = correct / total
 
 print(f"Test Loss: {test_loss:.4f} | Test Accuracy: {test_acc*100:.2f}%")
 
-# --- Dự đoán xác suất cho từng ảnh ---
+#Dự đoán xác suất cho từng ảnh
 all_probs = np.concatenate(all_probs, axis=0)
 all_preds = np.concatenate(all_preds, axis=0)
 all_labels = np.concatenate(all_labels, axis=0)
 
-# Hiển thị 5 ảnh ngẫu nhiên cùng xác suất
+#Hiển thị 5 ảnh ngẫu nhiên cùng xác suất
 indices = np.random.choice(len(test_dataset), 5, replace=False)
 
 plt.figure(figsize=(12, 6))
 for i, idx in enumerate(indices):
     img, label = test_dataset[idx]
-    img_np = np.transpose(img.numpy(), (1, 2, 0))  # CHW -> HWC
+    img_np = np.transpose(img.numpy(), (1, 2, 0))
     true_label = EMOTION_LABELS[label]
     pred_label = EMOTION_LABELS[all_preds[idx]]
     probs = all_probs[idx]
@@ -92,7 +92,7 @@ for i, idx in enumerate(indices):
 plt.tight_layout()
 plt.show()
 
-# --- Confusion matrix ---
+#Confusion matrix
 cm = confusion_matrix(all_labels, all_preds)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=EMOTION_LABELS)
 disp.plot(cmap='Blues', xticks_rotation=45)

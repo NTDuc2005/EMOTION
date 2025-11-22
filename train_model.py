@@ -7,7 +7,7 @@ import copy
 from tqdm import tqdm
 from model_cnn import EmotionCNN
 
-# --- Config ---
+#Config
 TRAIN_DIR = "data/train"
 TEST_DIR = "data/test"
 MODEL_PATH = "cnn_emotion_rgb.pth"
