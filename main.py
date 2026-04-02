@@ -1,186 +1,288 @@
-import cv2
-import tkinter as tk
-from tkinter import ttk, filedialog
-import PIL.Image, PIL.ImageTk
-from predict_emotion import predict_emotion
 import csv
-from datetime import datetime
 import os
+import subprocess
+import sys
+import time
+from datetime import datetime
+import cv2
+import PIL.Image
+import PIL.ImageTk
+import tkinter as tk
+from tkinter import filedialog, ttk
+from analyze import analyze_emotion_log
+from predict_emotion import predict_emotion
+from predict_face import is_face_model_ready, predict_face_id, reload_face_assets
+from pathlib import Path
 
-LOG_FILE = "emotion_log.csv"
+BASE_DIR = Path(__file__).resolve().parent
+LOG_FILE = BASE_DIR / "emotion_log.csv"
+TRAIN_SCRIPT = BASE_DIR / "train_face_model.py"
 
-class EmotionApp:
+LOG_INTERVAL_SEC = 1.0
+def _bbox_center(bbox):
+    x1, y1, x2, y2 = bbox
+    return ((x1 + x2) / 2.0, (y1 + y2) / 2.0)
+
+
+def _bbox_distance(bbox_a, bbox_b):
+    ax, ay = _bbox_center(bbox_a)
+    bx, by = _bbox_center(bbox_b)
+    return ((ax - bx) ** 2 + (ay - by) ** 2) ** 0.5
+
+
+class EmotionFaceApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Nhận diện cảm xúc")
-        self.root.geometry("1200x720")
-        self.root.configure(bg="#dbe9ff")
+        self.root.title("Nhan dien cam xuc + xac minh khuon mat")
+        self.root.geometry("1280x760")
+        self.root.configure(bg="#eaf2ff")
 
-        style = ttk.Style()
-        style.configure("TButton",
-                        font=("Segoe UI", 13),
-                        padding=10)
-        style.map("TButton",background=[("active", "#4da3ff")])
-
-        main_frame = tk.Frame(root, bg="#dbe9ff")
-        main_frame.pack(fill="both", expand=True, padx=20, pady=20)
-
-        left_frame = tk.Frame(main_frame, bg="white", bd=0, relief="flat")
-        left_frame.pack(side="left", fill="both", expand=True, padx=(0, 20))
-
-        # Khung bo góc viền webcam
-        self.video_border = tk.Frame(left_frame, bg="white")
-        self.video_border.pack(expand=True, fill="both", padx=10, pady=10)
-
-        self.video_label = tk.Label(self.video_border, bg="black")
-        self.video_label.pack(expand=True)
-
-        right_frame = tk.Frame(main_frame, bg="#e6f2ff", width=350, bd=2, relief="ridge")
-        right_frame.pack(side="right", fill="y")
-
-        tk.Label(right_frame, text="MENU ",
-                 bg="#e6f2ff", font=("Segoe UI", 18, "bold"),
-                 fg="#003d80").pack(pady=15)
-
-        # Nút bấm
-        ttk.Button(right_frame, text="ảnh từ folder",
-                   command=self.select_image).pack(pady=10, ipadx=10)
-        ttk.Button(right_frame, text="video từ folder",
-                   command=self.select_video).pack(pady=10, ipadx=10)
-        ttk.Button(right_frame, text="webcam",
-                   command=self.start_detection).pack(pady=10, ipadx=10)
-        ttk.Button(right_frame, text="Thoát",
-                   command=self.stop_detection).pack(pady=10, ipadx=10)
-
-        #kết quả
-        self.label_status = tk.Label(right_frame, text="",font=("Segoe UI", 12),bg="#e6f2ff", fg="#0059b3")
-        self.label_status.pack(pady=15)
-
-        self.label_result = tk.Label(right_frame, text="", wraplength=260,font=("Segoe UI", 13, "bold"), bg="#e6f2ff", fg="#008000")
-        self.label_result.pack(pady=10)
-
-        #bến
         self.running = False
         self.cap = None
-        #tạo file csv
+        self.source_name = "unknown"
+        self.last_log_time = 0.0
+
+        self._build_ui()
+        self._init_log()
+
+    def _build_ui(self):
+        style = ttk.Style()
+        style.configure("TButton", font=("Segoe UI", 12), padding=8)
+
+        container = tk.Frame(self.root, bg="#eaf2ff")
+        container.pack(fill="both", expand=True, padx=16, pady=16)
+
+        left = tk.Frame(container, bg="#111")
+        left.pack(side="left", fill="both", expand=True, padx=(0, 16))
+        self.video_label = tk.Label(left, bg="#111")
+        self.video_label.pack(fill="both", expand=True)
+
+        right = tk.Frame(container, bg="#f5f8ff", width=380, bd=1, relief="ridge")
+        right.pack(side="right", fill="y")
+
+        tk.Label(right, text="MENU", font=("Segoe UI", 18, "bold"), bg="#f5f8ff", fg="#1d3f7a").pack(pady=14)
+
+        ttk.Button(right, text="Anh tu folder", command=self.select_image).pack(fill="x", padx=20, pady=6)
+        ttk.Button(right, text="Video tu folder", command=self.select_video).pack(fill="x", padx=20, pady=6)
+        ttk.Button(right, text="Webcam laptop", command=self.start_webcam).pack(fill="x", padx=20, pady=6)
+        ttk.Button(right, text="Dung", command=self.stop).pack(fill="x", padx=20, pady=6)
+
+        self.status_label = tk.Label(right, text="San sang", font=("Segoe UI", 12, "bold"), bg="#f5f8ff", fg="#004a99")
+        self.status_label.pack(pady=(14, 6))
+
+        self.emotion_label = tk.Label(right, text="Emotion: -", font=("Segoe UI", 13), bg="#f5f8ff", fg="#0a5")
+        self.emotion_label.pack(pady=4)
+
+        self.face_label = tk.Label(right, text="Identity: -", font=("Segoe UI", 13), bg="#f5f8ff", fg="#aa5500")
+        self.face_label.pack(pady=4)
+
+        self.summary_label = tk.Label(
+            right,
+            text="",
+            wraplength=320,
+            justify="left",
+            font=("Segoe UI", 11),
+            bg="#f5f8ff",
+            fg="#1f1f1f",
+        )
+        self.summary_label.pack(pady=10, padx=16)
+
+    def _init_log(self):
         if not os.path.exists(LOG_FILE):
             with open(LOG_FILE, "w", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
-                writer.writerow(["time", "label", "confidence"])
+                writer.writerow(
+                    [
+                        "time",
+                        "source",
+                        "emotion",
+                        "emotion_confidence",
+                        "identity",
+                        "identity_confidence",
+                        "verified",
+                    ]
+                )
 
-    def log_emotion(self, emotion, confidence):
+    def _log_prediction(self, emotion, emotion_conf, identity, identity_conf, verified):
         now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         with open(LOG_FILE, "a", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            writer.writerow([now, emotion, f"{float(confidence) * 100:.1f}"])
+            writer.writerow(
+                [
+                    now,
+                    self.source_name,
+                    emotion,
+                    f"{emotion_conf * 100:.2f}",
+                    identity,
+                    f"{identity_conf * 100:.2f}",
+                    int(bool(verified)),
+                ]
+            )
 
-    #webcam
-    def start_detection(self):
-        if self.running:
-            return
+    def _draw_combined_results(self, frame, emotion_results, face_results):
+        used_face_indexes = set()
 
-        self.running = True
-        self.label_status.config(text="mở webcam")
+        for emotion_item in emotion_results:
+            bbox = emotion_item["bbox"]
+            best_face_idx = None
+            best_distance = float("inf")
 
-        self.cap = cv2.VideoCapture(0)
-        self.detect_loop()
+            for idx, face_item in enumerate(face_results):
+                if idx in used_face_indexes:
+                    continue
+                distance = _bbox_distance(bbox, face_item["bbox"])
+                if distance < best_distance:
+                    best_distance = distance
+                    best_face_idx = idx
 
-    def detect_loop(self):
-        if not self.running:
-            return
+            x1, y1, x2, y2 = bbox
+            color = (0, 180, 0)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
 
-        ret, frame = self.cap.read()
-        if ret:
-            emotion, frame, confidence = predict_emotion(frame)
-            confidence_value = float(confidence)  # ép kiểu float
+            emotion_label = f"Emotion: {emotion_item['emotion']} ({emotion_item['confidence'] * 100:.1f}%)"
+            cv2.putText(frame, emotion_label, (x1, max(20, y1 - 30)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
-            self.log_emotion(emotion, confidence_value)
+            if best_face_idx is not None:
+                used_face_indexes.add(best_face_idx)
+                face_item = face_results[best_face_idx]
+                status = face_item["identity"] if face_item["verified"] else "unknown"
+                face_label = f"Identity: {status} ({face_item['confidence'] * 100:.1f}%)"
+            else:
+                face_label = "Identity: unknown (0.0%)"
 
-            # Hiển thị nhãn và xác suất
-            self.label_result.config(text=f"Cảm xúc: {emotion} ({confidence_value * 100:.1f}%)")
+            cv2.putText(frame, face_label, (x1, max(45, y1 - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
-            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            img = PIL.Image.fromarray(rgb)
-            imgtk = PIL.ImageTk.PhotoImage(image=img)
-            self.video_label.imgtk = imgtk
-            self.video_label.configure(image=imgtk)
+        for idx, face_item in enumerate(face_results):
+            if idx in used_face_indexes:
+                continue
 
-        self.root.after(15, self.detect_loop)
-    #dung
-    def stop_detection(self):
-        if self.cap:
-            self.cap.release()
+            x1, y1, x2, y2 = face_item["bbox"]
+            color = (0, 180, 0)
+            cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+            face_name = face_item["identity"] if face_item["verified"] else "unknown"
+            face_label = f"Identity: {face_name} ({face_item['confidence'] * 100:.1f}%)"
+            cv2.putText(frame, face_label, (x1, max(20, y1 - 8)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
-        self.running = False
-        self.video_label.configure(image="")
-        self.label_status.config(text="Dừng nhận diện")
+        return frame
 
-        # Gọi analyze.py
-        try:
-            from analyze import analyze_emotion_log
-            summary, message = analyze_emotion_log()
+    def _analyze_frame(self, frame):
+        emotion_results = predict_emotion(frame)
+        face_results = predict_face_id(frame)
 
-            # In lên giao diện
-            self.label_result.config(text=f"{summary}\n\n{message}")
-        except Exception as e:
-            self.label_result.config(text=f"Lỗi: {e}")
+        frame = self._draw_combined_results(frame, emotion_results, face_results)
 
-    #ảnh
-    def select_image(self):
-        path = filedialog.askopenfilename(
-            filetypes=[("Image Files", "*.png *.jpg *.jpeg")]
+        top_emotion = "no-face"
+        top_emotion_conf = 0.0
+        if emotion_results:
+            best = max(emotion_results, key=lambda x: x["confidence"])
+            top_emotion = best["emotion"]
+            top_emotion_conf = float(best["confidence"])
+
+        top_identity = "unknown"
+        top_identity_conf = 0.0
+        top_verified = False
+        if face_results:
+            verified_faces = [x for x in face_results if x["verified"]]
+            candidate = max(verified_faces or face_results, key=lambda x: x["confidence"])
+            top_identity = candidate["identity"]
+            top_identity_conf = float(candidate["confidence"])
+            top_verified = bool(candidate["verified"])
+
+        self.emotion_label.config(text=f"Emotion: {top_emotion} ({top_emotion_conf * 100:.1f}%)")
+        self.face_label.config(
+            text=f"Identity: {top_identity} ({top_identity_conf * 100:.1f}%) - {'verified' if top_verified else 'unknown'}"
         )
-        if not path:
-            return
 
-        frame = cv2.imread(path)
-        emotion, frame, confidence = predict_emotion(frame)
-        confidence_value = float(confidence)  # ép kiểu float
+        now = time.time()
+        if now - self.last_log_time >= LOG_INTERVAL_SEC:
+            self._log_prediction(top_emotion, top_emotion_conf, top_identity, top_identity_conf, top_verified)
+            self.last_log_time = now
 
-        self.log_emotion(emotion, confidence_value)
+        return frame
 
-        # Hiển thị đồng thời nhãn và xác suất
-        self.label_result.config(text=f"Cảm xúc: {emotion} ({confidence_value * 100:.1f}%)")
-
+    def _show_frame(self, frame):
         rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         img = PIL.Image.fromarray(rgb)
         imgtk = PIL.ImageTk.PhotoImage(image=img)
         self.video_label.imgtk = imgtk
         self.video_label.configure(image=imgtk)
 
+    def _update_stream(self):
+        if not self.running or self.cap is None:
+            return
+
+        ret, frame = self.cap.read()
+        if not ret:
+            self.status_label.config(text="Khong doc duoc frame / ket thuc video", fg="#cc5500")
+            self.stop(auto=True)
+            return
+
+        frame = self._analyze_frame(frame)
+        self._show_frame(frame)
+        self.root.after(20, self._update_stream)
+
+    def start_webcam(self):
+        self.stop(auto=True)
+        self.cap = cv2.VideoCapture(0)
+        if not self.cap.isOpened():
+            self.status_label.config(text="Khong mo duoc webcam", fg="red")
+            return
+
+        self.source_name = "webcam"
+        self.running = True
+        self.status_label.config(text="Dang chay webcam", fg="green")
+        model_status = "Face model: san sang" if is_face_model_ready() else "Face model: chua train, se hien unknown"
+        self.summary_label.config(text=model_status)
+        self._update_stream()
+
     def select_video(self):
-        path = filedialog.askopenfilename(
-            filetypes=[("Video Files", "*.mp4 *.avi")])
+        path = filedialog.askopenfilename(filetypes=[("Video Files", "*.mp4 *.avi *.mov *.mkv")])
         if not path:
             return
-        cap = cv2.VideoCapture(path)
 
-        while True:
-            ret, frame = cap.read()
-            if not ret:
-                break
+        self.stop(auto=True)
+        self.cap = cv2.VideoCapture(path)
+        if not self.cap.isOpened():
+            self.status_label.config(text="Khong mo duoc video", fg="red")
+            return
 
-            emotion, frame, confidence = predict_emotion(frame)
-            confidence_value = float(confidence)  # ép kiểu float
+        self.source_name = os.path.basename(path)
+        self.running = True
+        self.status_label.config(text=f"Dang phat: {self.source_name}", fg="green")
+        model_status = "Face model: san sang" if is_face_model_ready() else "Face model: chua train, se hien unknown"
+        self.summary_label.config(text=model_status)
+        self._update_stream()
 
-            self.log_emotion(emotion, confidence_value)
+    def select_image(self):
+        path = filedialog.askopenfilename(filetypes=[("Image Files", "*.png *.jpg *.jpeg")])
+        if not path:
+            return
 
-            # Hiển thị đồng thời nhãn và xác suất
-            self.label_result.config(text=f"Cảm xúc: {emotion} ({confidence_value * 100:.1f}%)")
+        frame = cv2.imread(path)
+        if frame is None:
+            self.status_label.config(text="Khong doc duoc anh", fg="red")
+            return
 
-            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            img = PIL.Image.fromarray(rgb)
-            imgtk = PIL.ImageTk.PhotoImage(image=img)
-            self.video_label.imgtk = imgtk
-            self.video_label.configure(image=imgtk)
+        self.source_name = os.path.basename(path)
+        self.status_label.config(text=f"Dang xu ly anh: {self.source_name}", fg="#004a99")
+        self.summary_label.config(text="Face model: san sang" if is_face_model_ready() else "Face model: chua train, se hien unknown")
+        frame = self._analyze_frame(frame)
+        self._show_frame(frame)
 
-            self.root.update()
+    def stop(self, auto=False):
+        self.running = False
+        if self.cap is not None:
+            self.cap.release()
+            self.cap = None
 
-        cap.release()
-        self.label_status.config(text="Video đã phát xong")
+        if not auto:
+            self.status_label.config(text="Da dung", fg="#555")
+
+        summary, message = analyze_emotion_log(LOG_FILE)
+        self.summary_label.config(text=f"{summary}\n\n{message}")
 
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = EmotionApp(root)
+    app = EmotionFaceApp(root)
     root.mainloop()

@@ -1,39 +1,47 @@
-import pandas as pd
+import csv
 from collections import Counter
 
-#
+
 def analyze_emotion_log(csv_path="emotion_log.csv"):
     try:
-        df = pd.read_csv(csv_path, on_bad_lines='skip')
+        with open(csv_path, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            rows = list(reader)
     except FileNotFoundError:
-        return "không có csv ", ""
+        return "khong tim thay file log", ""
 
-    if df.empty:
-        return "Không có dữ liệu ", ""
+    if not rows:
+        return "log rong", ""
 
-    if 'label' not in df.columns:
-        return "không có cột label", ""
+    # Support both old schema (label) and new schema (emotion)
+    emotion_values = []
+    for row in rows:
+        value = row.get("emotion") or row.get("label")
+        if value:
+            emotion_values.append(value.strip().lower())
 
-    labels = df['label'].tolist()
-    counter = Counter(labels)
-    most_common_emotion, count = counter.most_common(1)[0]
+    if not emotion_values:
+        return "khong co cot emotion/label hop le", ""
+
+    counter = Counter(emotion_values)
+    emotion, count = counter.most_common(1)[0]
 
     messages = {
-        'Happy': "Bạn có vẻ rất vui hôm nay. Hãy tận hưởng niềm vui và lan tỏa năng lượng tích cực nhé!",
-        'Sad': "Có vẻ bạn đang hơi buồn. Hãy thư giãn và làm điều gì khiến bạn cảm thấy tốt hơn.",
-        'Angry': "Bạn đang có vẻ tức giận. Hít thở sâu và giữ bình tĩnh nhé!",
-        'Fear': "Bạn có vẻ lo lắng. Mọi chuyện rồi sẽ ổn thôi.",
-        'Disgust': "Bạn có chút khó chịu. Hãy nghỉ ngơi một chút.",
-        'Surprise': "Bạn có vẻ khá bất ngờ. Có chuyện gì thú vị vừa xảy ra chăng?",
-        'Neutral': "Bạn đang khá bình tĩnh và tập trung đấy!"
+        "happy": "Ban co ve vui ve. Giu nang luong tich cuc nhe!",
+        "sad": "Ban co ve buon. Thu nghi ngoi mot chut va thu gian.",
+        "angry": "Ban co ve dang cang thang. Thu hit tho sau de binh tinh.",
+        "fear": "Ban dang hoi lo lang. Moi chuyen roi se on.",
+        "disgust": "Ban co chut kho chiu. Thu doi khong gian de de chiu hon.",
+        "surprise": "Ban dang bat ngo. Co ve vua co dieu thu vi xay ra.",
+        "neutral": "Ban dang kha binh tinh va tap trung.",
     }
 
-    summary = f"Cảm xúc xuất hiện nhiều nhất: {most_common_emotion} ({count} lần)"
-    message = messages.get(most_common_emotion, "Không xác định cảm xúc.")
-
+    summary = f"Cam xuc xuat hien nhieu nhat: {emotion} ({count} lan)"
+    message = messages.get(emotion, "Khong xac dinh duoc thong diep phu hop.")
     return summary, message
+
 
 if __name__ == "__main__":
     s, m = analyze_emotion_log()
     print(s)
-    print("Dự đoán tâm trạng:", m)
+    print(m)

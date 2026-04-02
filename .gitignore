@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+esp_camera/.dart_tool/
+esp_camera/build/
+CameraWebServer/build/
+
+.idea/
+.vscode/

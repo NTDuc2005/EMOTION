@@ -1,41 +1,45 @@
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
+
 from config import EMOTION_LABELS
 
+
 def plot_emotion(csv_path="emotion_log.csv"):
-    # Đọc CSV
     try:
-        df = pd.read_csv(csv_path, on_bad_lines='skip')
+        df = pd.read_csv(csv_path, on_bad_lines="skip")
     except FileNotFoundError:
-        print(f"File {csv_path} không tồn tại.")
+        print(f"File {csv_path} khong ton tai.")
         return
 
     if df.empty:
-        print("CSV không có dữ liệu hợp lệ.")
+        print("CSV khong co du lieu hop le.")
         return
 
-    if 'label' not in df.columns:
-        print("CSV không có cột 'label'.")
+    col = "emotion" if "emotion" in df.columns else "label" if "label" in df.columns else None
+    if col is None:
+        print("CSV khong co cot emotion/label.")
         return
 
-    #Tính số lần xuất hiện
-    counts = df['label'].value_counts().reindex(EMOTION_LABELS).fillna(0)
+    values = df[col].astype(str).str.lower().str.strip()
+    counts = values.value_counts().reindex(EMOTION_LABELS).fillna(0)
     total = counts.sum()
+    if total == 0:
+        print("Khong co du lieu emotion de ve.")
+        return
+
     percentages = counts / total * 100
 
-    #Vẽ bar chart
-    plt.figure(figsize=(10,6))
-    bars = plt.bar(counts.index, counts.values, color='skyblue')
+    plt.figure(figsize=(10, 6))
+    bars = plt.bar(counts.index, counts.values, color="skyblue")
 
-    # Hiển thị % trên mỗi cột
     for bar, pct in zip(bars, percentages):
-        height = bar.get_height()
-        plt.text(bar.get_x() + bar.get_width()/2, height + 0.5, f"{pct:.1f}%", ha='center', va='bottom')
+        h = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width() / 2, h + 0.5, f"{pct:.1f}%", ha="center", va="bottom")
 
-    plt.title("Counts and probabilities of detected emotions (log)")
-    plt.xlabel("Cảm xúc")
-    plt.ylabel("Số lần xuất hiện")
-    plt.ylim(0, max(counts.values)*1.2)
+    plt.title("Counts and probabilities of detected emotions")
+    plt.xlabel("Emotion")
+    plt.ylabel("Count")
+    plt.ylim(0, max(counts.values) * 1.2 if len(counts.values) else 1)
     plt.show()
 
 
