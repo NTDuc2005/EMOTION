@@ -13,7 +13,7 @@ from analyze import analyze_emotion_log
 from predict_emotion import draw_emotion_results, predict_emotion
 from predict_face import draw_face_results, predict_face_id
 
-ESP32_STREAM_URL = "http://192.168.1.47:81/stream"
+ESP32_STREAM_URL = "http://10.62.123.117:81/stream"
 LOG_FILE = "emotion_log.csv"
 LOG_INTERVAL = 1.0
 RECONNECT_INTERVAL_MS = 3000

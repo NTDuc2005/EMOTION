@@ -16,7 +16,9 @@ EMOTION_LABELS = ["angry", "disgust", "fear", "happy", "neutral", "sad", "surpri
 FACE_MODEL_PATH = os.path.join(MODELS_DIR, "face_identity_model.pth")
 FACE_CLASSES_PATH = os.path.join(MODELS_DIR, "face_classes.json")
 FACE_IMG_SIZE = (112, 112)
-FACE_MIN_CONFIDENCE = 0.35
+
+# Tang nguong nay len de tranh nhan nguoi la thanh nguoi da train
+FACE_MIN_CONFIDENCE = 0.88
 
 TRAIN_DIR = os.path.join(DATA_DIR, "train")
 TEST_DIR = os.path.join(DATA_DIR, "test")

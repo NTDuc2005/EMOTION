@@ -13,10 +13,12 @@ from analyze import analyze_emotion_log
 from predict_emotion import predict_emotion
 from predict_face import is_face_model_ready, predict_face_id, reload_face_assets
 from pathlib import Path
+from urllib.parse import urlparse
 
 BASE_DIR = Path(__file__).resolve().parent
 LOG_FILE = BASE_DIR / "emotion_log.csv"
 TRAIN_SCRIPT = BASE_DIR / "train_face_model.py"
+DEFAULT_ESP32_URL = "http://10.62.123.117:81/stream"
 
 LOG_INTERVAL_SEC = 1.0
 def _bbox_center(bbox):
@@ -28,7 +30,23 @@ def _bbox_distance(bbox_a, bbox_b):
     ax, ay = _bbox_center(bbox_a)
     bx, by = _bbox_center(bbox_b)
     return ((ax - bx) ** 2 + (ay - by) ** 2) ** 0.5
+def normalize_esp32_stream_url(raw_url: str) -> str:
+    url = raw_url.strip()
+    if not url:
+        return ""
 
+    if not url.startswith(("http://", "https://")):
+        url = f"http://{url}"
+
+    parsed = urlparse(url)
+    path = parsed.path.rstrip("/")
+
+    if path == "":
+        path = "/stream"
+    elif path != "/stream":
+        path = f"{path}/stream"
+
+    return f"{parsed.scheme}://{parsed.netloc}{path}"
 
 class EmotionFaceApp:
     def __init__(self, root):
@@ -41,7 +59,11 @@ class EmotionFaceApp:
         self.cap = None
         self.source_name = "unknown"
         self.last_log_time = 0.0
+        self.esp32_url_var = tk.StringVar(value=DEFAULT_ESP32_URL)
 
+        self.frame_count = 0
+        self.last_emotion_results = []
+        self.last_face_results = []
         self._build_ui()
         self._init_log()
 
@@ -62,6 +84,10 @@ class EmotionFaceApp:
 
         tk.Label(right, text="MENU", font=("Segoe UI", 18, "bold"), bg="#f5f8ff", fg="#1d3f7a").pack(pady=14)
 
+        tk.Label(right, text="Link ESP32", font=("Segoe UI", 11, "bold"), bg="#f5f8ff", fg="#1d3f7a").pack(pady=(4, 4), padx=20, anchor="w")
+        tk.Entry(right, textvariable=self.esp32_url_var, font=("Segoe UI", 11)).pack(fill="x", padx=20, pady=(0, 8))
+
+        ttk.Button(right, text="ESP32 camera", command=self.start_esp32).pack(fill="x", padx=20, pady=6)
         ttk.Button(right, text="Anh tu folder", command=self.select_image).pack(fill="x", padx=20, pady=6)
         ttk.Button(right, text="Video tu folder", command=self.select_video).pack(fill="x", padx=20, pady=6)
         ttk.Button(right, text="Webcam laptop", command=self.start_webcam).pack(fill="x", padx=20, pady=6)
@@ -212,17 +238,79 @@ class EmotionFaceApp:
             return
 
         ret, frame = self.cap.read()
-        if not ret:
+        if not ret or frame is None:
             self.status_label.config(text="Khong doc duoc frame / ket thuc video", fg="#cc5500")
             self.stop(auto=True)
             return
 
-        frame = self._analyze_frame(frame)
+        self.frame_count += 1
+
+        # resize nhe hon de model chay nhanh hon
+        frame = cv2.resize(frame, (640, 480))
+
+        # chi nhan dien moi 4 frame
+        if self.frame_count %  5 == 0:
+            self.last_emotion_results = predict_emotion(frame)
+            self.last_face_results = predict_face_id(frame)
+
+            top_emotion = "no-face"
+            top_emotion_conf = 0.0
+            if self.last_emotion_results:
+                best = max(self.last_emotion_results, key=lambda x: x["confidence"])
+                top_emotion = best["emotion"]
+                top_emotion_conf = float(best["confidence"])
+
+            top_identity = "unknown"
+            top_identity_conf = 0.0
+            top_verified = False
+            if self.last_face_results:
+                verified_faces = [x for x in self.last_face_results if x["verified"]]
+                candidate = max(verified_faces or self.last_face_results, key=lambda x: x["confidence"])
+                top_identity = candidate["identity"]
+                top_identity_conf = float(candidate["confidence"])
+                top_verified = bool(candidate["verified"])
+
+            self.emotion_label.config(text=f"Emotion: {top_emotion} ({top_emotion_conf * 100:.1f}%)")
+            self.face_label.config(
+                text=f"Identity: {top_identity} ({top_identity_conf * 100:.1f}%) - {'verified' if top_verified else 'unknown'}"
+            )
+
+        frame = self._draw_combined_results(frame, self.last_emotion_results, self.last_face_results)
         self._show_frame(frame)
-        self.root.after(20, self._update_stream)
+
+        self.root.after(40, self._update_stream)
+
+    def start_esp32(self):
+        self.stop(auto=True)
+
+        self.frame_count = 0
+        self.last_emotion_results = []
+        self.last_face_results = []
+
+        esp32_url = self.esp32_url_var.get().strip()
+        if not esp32_url:
+            self.status_label.config(text="Chua nhap link ESP32", fg="red")
+            return
+
+        self.cap = cv2.VideoCapture(esp32_url)
+        if not self.cap.isOpened():
+            self.status_label.config(text="Khong mo duoc stream ESP32", fg="red")
+            return
+
+        self.source_name = "esp32"
+        self.running = True
+        self.status_label.config(text="Dang chay ESP32", fg="green")
+        model_status = "Face model: san sang" if is_face_model_ready() else "Face model: chua train, se hien unknown"
+        self.summary_label.config(text=model_status)
+        self._update_stream()
 
     def start_webcam(self):
         self.stop(auto=True)
+
+        self.frame_count = 0
+        self.last_emotion_results = []
+        self.last_face_results = []
+
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
             self.status_label.config(text="Khong mo duoc webcam", fg="red")
@@ -234,7 +322,6 @@ class EmotionFaceApp:
         model_status = "Face model: san sang" if is_face_model_ready() else "Face model: chua train, se hien unknown"
         self.summary_label.config(text=model_status)
         self._update_stream()
-
     def select_video(self):
         path = filedialog.askopenfilename(filetypes=[("Video Files", "*.mp4 *.avi *.mov *.mkv")])
         if not path:

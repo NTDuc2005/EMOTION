@@ -96,6 +96,11 @@ static const char *_STREAM_PART = "Content-Type: image/jpeg\r\nContent-Length: %
 httpd_handle_t stream_httpd = NULL;
 httpd_handle_t camera_httpd = NULL;
 
+extern void setPan(int angle);
+extern void setTilt(int angle);
+extern int panAngle;
+extern int tiltAngle;
+
 #if CONFIG_ESP_FACE_DETECT_ENABLED
 
 static int8_t detection_enabled = 0;
@@ -815,6 +820,39 @@ static esp_err_t parse_get(httpd_req_t *req, char **obuf)
     return ESP_FAIL;
 }
 
+static esp_err_t servo_handler(httpd_req_t *req)
+{
+    char *buf = NULL;
+    char pan_value[16];
+    char tilt_value[16];
+    bool handled = false;
+
+    if (parse_get(req, &buf) != ESP_OK) {
+        return ESP_FAIL;
+    }
+
+    if (httpd_query_key_value(buf, "pan", pan_value, sizeof(pan_value)) == ESP_OK) {
+        setPan(atoi(pan_value));
+        handled = true;
+    }
+
+    if (httpd_query_key_value(buf, "tilt", tilt_value, sizeof(tilt_value)) == ESP_OK) {
+        setTilt(atoi(tilt_value));
+        handled = true;
+    }
+
+    free(buf);
+
+    if (!handled) {
+        httpd_resp_send_404(req);
+        return ESP_FAIL;
+    }
+
+    httpd_resp_set_type(req, "text/plain");
+    httpd_resp_set_hdr(req, "Access-Control-Allow-Origin", "*");
+    return httpd_resp_send(req, NULL, 0);
+}
+
 static esp_err_t cmd_handler(httpd_req_t *req)
 {
     char *buf = NULL;
@@ -888,6 +926,14 @@ static esp_err_t cmd_handler(httpd_req_t *req)
         res = s->set_wb_mode(s, val);
     else if (!strcmp(variable, "ae_level"))
         res = s->set_ae_level(s, val);
+    else if (!strcmp(variable, "pan")) {
+        setPan(val);
+        res = 0;
+    }
+    else if (!strcmp(variable, "tilt")) {
+        setTilt(val);
+        res = 0;
+    }
 #ifdef CONFIG_LED_ILLUMINATOR_ENABLED
     else if (!strcmp(variable, "led_intensity")) {
         led_duty = val;
@@ -951,6 +997,7 @@ static esp_err_t status_handler(httpd_req_t *req)
 
         p+=print_reg(p, s, 0x3500, 0xFFFF0);//16 bit
         p+=print_reg(p, s, 0x3503, 0xFF);
+      p += sprintf(p, "\"pan\":%d,\"tilt\":%d,", panAngle, tiltAngle);
         p+=print_reg(p, s, 0x350a, 0x3FF);//10 bit
         p+=print_reg(p, s, 0x350c, 0xFFFF);//16 bit
 
@@ -1224,6 +1271,12 @@ void startCameraServer()
         .handler = cmd_handler,
         .user_ctx = NULL};
 
+    httpd_uri_t servo_uri = {
+        .uri = "/servo",
+        .method = HTTP_GET,
+        .handler = servo_handler,
+        .user_ctx = NULL};
+
     httpd_uri_t capture_uri = {
         .uri = "/capture",
         .method = HTTP_GET,
@@ -1285,6 +1338,7 @@ void startCameraServer()
     {
         httpd_register_uri_handler(camera_httpd, &index_uri);
         httpd_register_uri_handler(camera_httpd, &cmd_uri);
+        httpd_register_uri_handler(camera_httpd, &servo_uri);
         httpd_register_uri_handler(camera_httpd, &status_uri);
         httpd_register_uri_handler(camera_httpd, &capture_uri);
         httpd_register_uri_handler(camera_httpd, &bmp_uri);

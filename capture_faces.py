@@ -22,7 +22,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--name", required=True, help="Ten nguoi can chup")
     parser.add_argument("--source", choices=["webcam", "esp"], default="webcam")
-    parser.add_argument("--url", default="http://192.168.1.47:81/stream", help="URL stream ESP32")
+    parser.add_argument("--url", default="http://10.62.123.117:81/stream", help="URL stream ESP32")
     parser.add_argument("--num", type=int, default=80, help="So anh can luu")
     parser.add_argument("--interval", type=float, default=0.25, help="Khoang cach giua 2 lan chup (giay)")
     parser.add_argument("--padding", type=int, default=12)

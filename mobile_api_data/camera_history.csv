@@ -1,0 +1,384 @@
+time,source,emotion,emotion_confidence,identity,identity_confidence,verified,face_status,faces_detected,result_image
+2026-04-15 10:21:10,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102110_203018.jpg
+2026-04-15 10:21:12,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102112_392328.jpg
+2026-04-15 10:21:14,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102114_489452.jpg
+2026-04-15 10:21:16,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102116_569936.jpg
+2026-04-15 10:21:18,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102118_625635.jpg
+2026-04-15 10:21:20,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102120_702801.jpg
+2026-04-15 10:21:22,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102122_781789.jpg
+2026-04-15 10:21:24,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102124_930717.jpg
+2026-04-15 10:21:26,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102126_934582.jpg
+2026-04-15 10:21:29,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102129_021467.jpg
+2026-04-15 10:21:31,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102131_251576.jpg
+2026-04-15 10:21:33,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102133_474501.jpg
+2026-04-15 10:21:35,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102135_478731.jpg
+2026-04-15 10:21:37,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102137_536901.jpg
+2026-04-15 10:21:39,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102139_690451.jpg
+2026-04-15 10:21:41,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102141_942756.jpg
+2026-04-15 10:21:44,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_102144_080420.jpg
+2026-04-15 10:21:46,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_102146_379300.jpg
+2026-04-15 10:21:48,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_102148_564020.jpg
+2026-04-15 10:21:50,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102150_738723.jpg
+2026-04-15 10:21:52,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102152_941625.jpg
+2026-04-15 10:21:55,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102155_168760.jpg
+2026-04-15 10:21:57,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102157_291234.jpg
+2026-04-15 10:21:59,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102159_427422.jpg
+2026-04-15 10:22:01,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102201_567390.jpg
+2026-04-15 10:22:03,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102203_697917.jpg
+2026-04-15 10:22:05,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102205_841824.jpg
+2026-04-15 10:22:08,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102208_071682.jpg
+2026-04-15 10:22:10,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102210_543250.jpg
+2026-04-15 10:22:12,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102212_594104.jpg
+2026-04-15 10:22:14,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102214_864388.jpg
+2026-04-15 10:22:17,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102217_068072.jpg
+2026-04-15 10:22:19,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102219_078963.jpg
+2026-04-15 10:22:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102221_271126.jpg
+2026-04-15 10:22:23,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102223_331809.jpg
+2026-04-15 10:22:25,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102225_471136.jpg
+2026-04-15 10:22:27,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102227_549035.jpg
+2026-04-15 10:22:29,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102229_786586.jpg
+2026-04-15 10:22:31,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102231_983819.jpg
+2026-04-15 10:22:34,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102234_004846.jpg
+2026-04-15 10:22:36,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102236_260186.jpg
+2026-04-15 10:22:38,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102238_486976.jpg
+2026-04-15 10:22:40,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102240_791350.jpg
+2026-04-15 10:22:42,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102242_890752.jpg
+2026-04-15 10:22:44,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102244_910580.jpg
+2026-04-15 10:22:47,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102247_044945.jpg
+2026-04-15 10:22:49,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102249_192637.jpg
+2026-04-15 10:22:51,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102251_417732.jpg
+2026-04-15 10:22:53,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102253_506639.jpg
+2026-04-15 10:22:55,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102255_659250.jpg
+2026-04-15 10:22:57,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102257_735200.jpg
+2026-04-15 10:22:59,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102259_762617.jpg
+2026-04-15 10:23:01,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102301_858201.jpg
+2026-04-15 10:23:04,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102304_090930.jpg
+2026-04-15 10:23:06,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102306_136869.jpg
+2026-04-15 10:23:08,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102308_242433.jpg
+2026-04-15 10:23:10,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102310_637044.jpg
+2026-04-15 10:23:12,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102312_856443.jpg
+2026-04-15 10:23:14,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102314_945796.jpg
+2026-04-15 10:23:16,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102316_987049.jpg
+2026-04-15 10:23:19,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102319_071045.jpg
+2026-04-15 10:23:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102321_184042.jpg
+2026-04-15 10:23:23,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102323_234597.jpg
+2026-04-15 10:23:25,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102325_518155.jpg
+2026-04-15 10:23:27,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102327_578929.jpg
+2026-04-15 10:23:29,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102329_680448.jpg
+2026-04-15 10:23:31,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102331_712883.jpg
+2026-04-15 10:23:33,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102333_750729.jpg
+2026-04-15 10:23:35,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102335_786287.jpg
+2026-04-15 10:23:37,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102337_992032.jpg
+2026-04-15 10:23:40,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102340_769213.jpg
+2026-04-15 10:23:42,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102342_991068.jpg
+2026-04-15 10:23:45,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102345_004278.jpg
+2026-04-15 10:23:47,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102347_008631.jpg
+2026-04-15 10:23:49,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102349_265956.jpg
+2026-04-15 10:23:51,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102351_509651.jpg
+2026-04-15 10:23:54,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102354_751003.jpg
+2026-04-15 10:23:56,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102356_877226.jpg
+2026-04-15 10:23:58,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102358_896903.jpg
+2026-04-15 10:24:00,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102400_945973.jpg
+2026-04-15 10:24:03,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102403_149711.jpg
+2026-04-15 10:24:05,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102405_291229.jpg
+2026-04-15 10:24:07,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102407_302802.jpg
+2026-04-15 10:24:11,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102411_452301.jpg
+2026-04-15 10:24:13,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102413_622266.jpg
+2026-04-15 10:24:15,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102415_654678.jpg
+2026-04-15 10:24:17,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102417_677331.jpg
+2026-04-15 10:24:19,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102419_848537.jpg
+2026-04-15 10:24:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102421_849415.jpg
+2026-04-15 10:24:25,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102425_089699.jpg
+2026-04-15 10:24:27,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102427_232598.jpg
+2026-04-15 10:24:29,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102429_310585.jpg
+2026-04-15 10:24:31,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102431_451841.jpg
+2026-04-15 10:24:33,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102433_758156.jpg
+2026-04-15 10:24:35,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102435_765023.jpg
+2026-04-15 10:24:37,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102437_862747.jpg
+2026-04-15 10:24:41,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102441_273624.jpg
+2026-04-15 10:24:43,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102443_294418.jpg
+2026-04-15 10:24:45,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102445_433518.jpg
+2026-04-15 10:24:47,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102447_636597.jpg
+2026-04-15 10:24:49,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102449_912007.jpg
+2026-04-15 10:24:52,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102452_073033.jpg
+2026-04-15 10:24:55,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_102455_439236.jpg
+2026-04-15 10:24:57,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_102457_756385.jpg
+2026-04-15 10:24:59,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102459_809165.jpg
+2026-04-15 10:25:01,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102501_925566.jpg
+2026-04-15 10:25:04,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102504_022784.jpg
+2026-04-15 10:25:06,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102506_174082.jpg
+2026-04-15 10:25:08,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102508_328578.jpg
+2026-04-15 10:25:10,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102510_981776.jpg
+2026-04-15 10:25:13,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102513_000300.jpg
+2026-04-15 10:25:15,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102515_158630.jpg
+2026-04-15 10:25:17,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102517_208239.jpg
+2026-04-15 10:25:19,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102519_470397.jpg
+2026-04-15 10:25:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102521_553468.jpg
+2026-04-15 10:25:25,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102525_366130.jpg
+2026-04-15 10:25:27,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102527_485517.jpg
+2026-04-15 10:25:29,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102529_557782.jpg
+2026-04-15 10:25:31,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102531_606357.jpg
+2026-04-15 10:25:33,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102533_690106.jpg
+2026-04-15 10:25:35,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102535_804546.jpg
+2026-04-15 10:25:37,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102537_857165.jpg
+2026-04-15 10:25:41,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102541_265496.jpg
+2026-04-15 10:25:43,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102543_498592.jpg
+2026-04-15 10:25:45,esp32,uncertain,100.00,unknown,0.00,0,Khong xac nhan duoc danh tinh,0,camera_auto_20260415_102545_575056.jpg
+2026-04-15 10:25:47,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102547_748387.jpg
+2026-04-15 10:25:49,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102549_912962.jpg
+2026-04-15 10:25:52,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102552_045178.jpg
+2026-04-15 10:25:54,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102554_163826.jpg
+2026-04-15 10:25:56,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102556_264759.jpg
+2026-04-15 10:25:58,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102558_396711.jpg
+2026-04-15 10:26:00,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102600_432244.jpg
+2026-04-15 10:26:02,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102602_605025.jpg
+2026-04-15 10:26:04,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102604_725390.jpg
+2026-04-15 10:26:06,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102606_857141.jpg
+2026-04-15 10:26:09,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102609_103982.jpg
+2026-04-15 10:26:11,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102611_330943.jpg
+2026-04-15 10:26:13,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102613_374163.jpg
+2026-04-15 10:26:15,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102615_500890.jpg
+2026-04-15 10:26:17,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102617_639455.jpg
+2026-04-15 10:26:19,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102619_755879.jpg
+2026-04-15 10:26:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102621_883261.jpg
+2026-04-15 10:26:24,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102624_166217.jpg
+2026-04-15 10:26:26,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102626_279709.jpg
+2026-04-15 10:26:28,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102628_410736.jpg
+2026-04-15 10:26:30,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102630_586880.jpg
+2026-04-15 10:26:32,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102632_723627.jpg
+2026-04-15 10:26:34,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102634_817772.jpg
+2026-04-15 10:26:36,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102636_915055.jpg
+2026-04-15 10:26:39,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102639_301451.jpg
+2026-04-15 10:26:41,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102641_513069.jpg
+2026-04-15 10:26:43,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102643_757940.jpg
+2026-04-15 10:26:45,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102645_941155.jpg
+2026-04-15 10:26:48,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102648_051188.jpg
+2026-04-15 10:26:50,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102650_064697.jpg
+2026-04-15 10:26:52,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102652_168680.jpg
+2026-04-15 10:26:55,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102655_314321.jpg
+2026-04-15 10:26:57,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102657_550171.jpg
+2026-04-15 10:26:59,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102659_629957.jpg
+2026-04-15 10:27:01,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102701_763099.jpg
+2026-04-15 10:27:03,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102703_914045.jpg
+2026-04-15 10:27:06,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102706_038866.jpg
+2026-04-15 10:27:08,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102708_324434.jpg
+2026-04-15 10:27:11,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102711_265175.jpg
+2026-04-15 10:27:13,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102713_392298.jpg
+2026-04-15 10:27:15,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102715_694499.jpg
+2026-04-15 10:27:46,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_102746_374003.jpg
+2026-04-15 17:13:16,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171316_271873.jpg
+2026-04-15 17:13:19,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171319_200637.jpg
+2026-04-15 17:13:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171321_319111.jpg
+2026-04-15 17:13:23,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171323_528675.jpg
+2026-04-15 17:13:25,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171325_641793.jpg
+2026-04-15 17:13:27,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171327_742300.jpg
+2026-04-15 17:13:29,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171329_921560.jpg
+2026-04-15 17:13:31,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171331_958972.jpg
+2026-04-15 17:13:33,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171333_997370.jpg
+2026-04-15 17:13:36,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171336_004057.jpg
+2026-04-15 17:13:38,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171338_017776.jpg
+2026-04-15 17:13:40,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171340_055127.jpg
+2026-04-15 17:13:42,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171342_109750.jpg
+2026-04-15 17:13:44,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171344_113326.jpg
+2026-04-15 17:13:46,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171346_118992.jpg
+2026-04-15 17:13:48,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171348_183909.jpg
+2026-04-15 17:13:50,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171350_448418.jpg
+2026-04-15 17:13:52,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171352_502986.jpg
+2026-04-15 17:13:54,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171354_580048.jpg
+2026-04-15 17:13:56,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171356_588278.jpg
+2026-04-15 17:13:58,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171358_632235.jpg
+2026-04-15 17:14:00,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171400_688710.jpg
+2026-04-15 17:14:02,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171402_695342.jpg
+2026-04-15 17:14:04,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171404_726183.jpg
+2026-04-15 17:14:06,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171406_792987.jpg
+2026-04-15 17:14:08,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171408_806620.jpg
+2026-04-15 17:14:10,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171410_854824.jpg
+2026-04-15 17:14:12,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171412_861202.jpg
+2026-04-15 17:14:15,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171415_106143.jpg
+2026-04-15 17:14:17,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171417_157917.jpg
+2026-04-15 17:14:19,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171419_378297.jpg
+2026-04-15 17:14:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171421_834628.jpg
+2026-04-15 17:14:24,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171424_090654.jpg
+2026-04-15 17:14:26,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171426_273480.jpg
+2026-04-15 17:14:28,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171428_296501.jpg
+2026-04-15 17:14:30,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171430_477797.jpg
+2026-04-15 17:14:32,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171432_726863.jpg
+2026-04-15 17:14:34,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171434_765174.jpg
+2026-04-15 17:14:36,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171436_877205.jpg
+2026-04-15 17:14:39,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171439_012631.jpg
+2026-04-15 17:14:41,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171441_093394.jpg
+2026-04-15 17:14:43,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171443_364481.jpg
+2026-04-15 17:14:45,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171445_509093.jpg
+2026-04-15 17:14:47,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171447_675292.jpg
+2026-04-15 17:14:49,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171449_858977.jpg
+2026-04-15 17:14:51,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171451_903021.jpg
+2026-04-15 17:14:53,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171453_976050.jpg
+2026-04-15 17:14:56,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171456_003471.jpg
+2026-04-15 17:14:58,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171458_134914.jpg
+2026-04-15 17:15:00,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171500_247109.jpg
+2026-04-15 17:15:02,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171502_440634.jpg
+2026-04-15 17:15:04,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171504_584875.jpg
+2026-04-15 17:15:06,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171506_708832.jpg
+2026-04-15 17:15:08,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171508_927962.jpg
+2026-04-15 17:15:11,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171511_243854.jpg
+2026-04-15 17:15:13,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171513_296147.jpg
+2026-04-15 17:15:15,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171515_429342.jpg
+2026-04-15 17:15:17,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171517_475437.jpg
+2026-04-15 17:15:19,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171519_624665.jpg
+2026-04-15 17:15:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171521_832863.jpg
+2026-04-15 17:15:23,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171523_877356.jpg
+2026-04-15 17:15:25,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171525_981640.jpg
+2026-04-15 17:15:28,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171528_139016.jpg
+2026-04-15 17:15:30,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171530_295170.jpg
+2026-04-15 17:15:32,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171532_376958.jpg
+2026-04-15 17:15:34,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171534_425425.jpg
+2026-04-15 17:15:36,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171536_546919.jpg
+2026-04-15 17:15:38,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171538_715627.jpg
+2026-04-15 17:15:40,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171540_774148.jpg
+2026-04-15 17:15:42,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171542_983614.jpg
+2026-04-15 17:15:45,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171545_116798.jpg
+2026-04-15 17:15:47,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171547_227202.jpg
+2026-04-15 17:15:49,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171549_298784.jpg
+2026-04-15 17:15:51,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171551_524452.jpg
+2026-04-15 17:15:53,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171553_609731.jpg
+2026-04-15 17:15:55,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171555_787588.jpg
+2026-04-15 17:15:57,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171557_849548.jpg
+2026-04-15 17:15:59,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171559_862264.jpg
+2026-04-15 17:16:01,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171601_951333.jpg
+2026-04-15 17:16:04,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171604_003129.jpg
+2026-04-15 17:16:06,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171606_065789.jpg
+2026-04-15 17:16:08,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171608_156972.jpg
+2026-04-15 17:16:10,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171610_157556.jpg
+2026-04-15 17:16:12,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171612_327249.jpg
+2026-04-15 17:16:14,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171614_341030.jpg
+2026-04-15 17:16:16,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171616_594454.jpg
+2026-04-15 17:16:18,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171618_617830.jpg
+2026-04-15 17:16:20,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171620_937975.jpg
+2026-04-15 17:16:23,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171623_024537.jpg
+2026-04-15 17:16:25,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171625_263433.jpg
+2026-04-15 17:16:27,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171627_298182.jpg
+2026-04-15 17:16:29,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171629_386659.jpg
+2026-04-15 17:16:31,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171631_415038.jpg
+2026-04-15 17:16:33,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171633_641761.jpg
+2026-04-15 17:16:38,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171638_906325.jpg
+2026-04-15 17:16:41,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171641_137934.jpg
+2026-04-15 17:16:43,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171643_162144.jpg
+2026-04-15 17:16:45,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171645_374447.jpg
+2026-04-15 17:16:47,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171647_578452.jpg
+2026-04-15 17:16:49,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171649_719376.jpg
+2026-04-15 17:16:51,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171651_922755.jpg
+2026-04-15 17:16:54,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171654_021373.jpg
+2026-04-15 17:16:56,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171656_089745.jpg
+2026-04-15 17:16:58,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171658_224248.jpg
+2026-04-15 17:17:00,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171700_250068.jpg
+2026-04-15 17:17:02,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171702_487019.jpg
+2026-04-15 17:17:04,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171704_550252.jpg
+2026-04-15 17:17:06,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171706_587625.jpg
+2026-04-15 17:17:08,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171708_825829.jpg
+2026-04-15 17:17:10,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171710_838168.jpg
+2026-04-15 17:17:12,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171712_938177.jpg
+2026-04-15 17:17:15,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171715_091854.jpg
+2026-04-15 17:17:17,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171717_173062.jpg
+2026-04-15 17:17:19,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171719_570522.jpg
+2026-04-15 17:17:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171721_820120.jpg
+2026-04-15 17:17:24,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171724_021179.jpg
+2026-04-15 17:17:26,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171726_316089.jpg
+2026-04-15 17:17:28,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171728_459228.jpg
+2026-04-15 17:17:30,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171730_481979.jpg
+2026-04-15 17:17:32,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171732_599397.jpg
+2026-04-15 17:17:34,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171734_813976.jpg
+2026-04-15 17:17:36,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171736_894845.jpg
+2026-04-15 17:17:39,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171739_044917.jpg
+2026-04-15 17:17:41,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171741_102377.jpg
+2026-04-15 17:17:43,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171743_170599.jpg
+2026-04-15 17:17:45,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171745_188453.jpg
+2026-04-15 17:17:47,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171747_214376.jpg
+2026-04-15 17:17:49,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171749_337109.jpg
+2026-04-15 17:17:51,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171751_545018.jpg
+2026-04-15 17:17:53,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171753_567921.jpg
+2026-04-15 17:17:55,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171755_773857.jpg
+2026-04-15 17:17:57,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171757_923174.jpg
+2026-04-15 17:18:00,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171800_089524.jpg
+2026-04-15 17:18:02,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171802_092554.jpg
+2026-04-15 17:18:04,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171804_144930.jpg
+2026-04-15 17:18:06,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171806_228950.jpg
+2026-04-15 17:18:08,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171808_263650.jpg
+2026-04-15 17:18:10,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171810_306104.jpg
+2026-04-15 17:18:12,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171812_471169.jpg
+2026-04-15 17:18:14,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171814_691701.jpg
+2026-04-15 17:18:16,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171816_978904.jpg
+2026-04-15 17:18:19,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171819_104896.jpg
+2026-04-15 17:18:21,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171821_354171.jpg
+2026-04-15 17:18:23,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171823_601802.jpg
+2026-04-15 17:18:25,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171825_901431.jpg
+2026-04-15 17:18:27,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171827_960671.jpg
+2026-04-15 17:18:30,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171830_048152.jpg
+2026-04-15 17:18:32,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171832_215195.jpg
+2026-04-15 17:18:34,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171834_238566.jpg
+2026-04-15 17:18:36,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171836_307834.jpg
+2026-04-15 17:18:38,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171838_407048.jpg
+2026-04-15 17:18:40,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171840_433112.jpg
+2026-04-15 17:18:42,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171842_501560.jpg
+2026-04-15 17:18:44,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171844_598891.jpg
+2026-04-15 17:18:46,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171846_681641.jpg
+2026-04-15 17:18:48,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171848_951484.jpg
+2026-04-15 17:18:50,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171850_965121.jpg
+2026-04-15 17:18:53,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171853_047945.jpg
+2026-04-15 17:18:55,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171855_102948.jpg
+2026-04-15 17:18:57,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171857_328651.jpg
+2026-04-15 17:18:59,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171859_400842.jpg
+2026-04-15 17:19:01,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171901_650768.jpg
+2026-04-15 17:19:03,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171903_840452.jpg
+2026-04-15 17:19:06,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171906_044704.jpg
+2026-04-15 17:19:08,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171908_170066.jpg
+2026-04-15 17:19:10,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171910_196279.jpg
+2026-04-15 17:19:12,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171912_255598.jpg
+2026-04-15 17:19:14,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171914_391707.jpg
+2026-04-15 17:19:16,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171916_422664.jpg
+2026-04-15 17:19:18,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171918_445187.jpg
+2026-04-15 17:19:20,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171920_675734.jpg
+2026-04-15 17:19:22,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171922_707014.jpg
+2026-04-15 17:19:24,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171924_729525.jpg
+2026-04-15 17:19:27,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171927_019947.jpg
+2026-04-15 17:19:29,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171929_143595.jpg
+2026-04-15 17:19:31,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171931_282672.jpg
+2026-04-15 17:19:33,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171933_458417.jpg
+2026-04-15 17:19:35,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171935_470103.jpg
+2026-04-15 17:19:37,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171937_643927.jpg
+2026-04-15 17:19:39,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171939_649515.jpg
+2026-04-15 17:19:41,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171941_752980.jpg
+2026-04-15 17:19:43,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171943_769837.jpg
+2026-04-15 17:19:45,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171945_940603.jpg
+2026-04-15 17:19:48,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171948_042633.jpg
+2026-04-15 17:19:50,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171950_078673.jpg
+2026-04-15 17:19:52,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171952_098141.jpg
+2026-04-15 17:19:54,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171954_234039.jpg
+2026-04-15 17:19:56,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171956_367822.jpg
+2026-04-15 17:19:58,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_171958_570541.jpg
+2026-04-15 17:20:00,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172000_803044.jpg
+2026-04-15 17:20:02,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172002_815480.jpg
+2026-04-15 17:20:04,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172004_930934.jpg
+2026-04-15 17:20:07,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172007_168115.jpg
+2026-04-15 17:20:09,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172009_531961.jpg
+2026-04-15 17:20:11,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172011_600219.jpg
+2026-04-15 17:20:13,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172013_629333.jpg
+2026-04-15 17:20:15,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172015_865516.jpg
+2026-04-15 17:20:18,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172018_037944.jpg
+2026-04-15 17:20:20,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172020_372000.jpg
+2026-04-15 17:20:22,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172022_668190.jpg
+2026-04-15 17:20:24,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172024_706468.jpg
+2026-04-15 17:20:26,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172026_905242.jpg
+2026-04-15 17:20:29,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172029_057716.jpg
+2026-04-15 17:20:31,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172031_677407.jpg
+2026-04-15 17:20:33,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172033_923174.jpg
+2026-04-15 17:20:36,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172036_209934.jpg
+2026-04-15 17:20:38,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172038_387504.jpg
+2026-04-15 17:20:40,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172040_432062.jpg
+2026-04-15 17:20:42,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172042_728377.jpg
+2026-04-15 17:20:44,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172044_867013.jpg
+2026-04-15 17:20:46,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172046_949027.jpg
+2026-04-15 17:20:49,esp32,uncertain,100.00,unknown,100.00,0,Khong xac nhan duoc danh tinh,1,camera_auto_20260415_172049_009985.jpg
+2026-04-15 17:20:51,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172051_277918.jpg
+2026-04-15 17:20:53,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172053_493398.jpg
+2026-04-15 17:20:55,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172055_586180.jpg
+2026-04-15 17:21:27,esp32,no-face,0.00,unknown,0.00,0,Khong phat hien khuon mat,0,camera_auto_20260415_172127_079628.jpg
